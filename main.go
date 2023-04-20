@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"go-ca/internal/app/infrastructures/database"
+	"go-ca/internal/app/infrastructure/database"
 
 	"github.com/joho/godotenv"
 )
