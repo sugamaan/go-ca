@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http"
 
 	"go-ca/internal/app/infrastructure/database"
 
@@ -14,6 +15,14 @@ func main() {
 	loadEnv()
 	// DB接続
 	database.ConnectDb()
+
+	// サーバー
+	http.HandleFunc("/ping", pingHandler)
+	http.HandleFunc("/tasks", tasksHandler)
+
+	// サーバーの起動
+	fmt.Println("Starting server on port 8081...")
+	log.Fatal(http.ListenAndServe(":8081", nil))
 }
 
 func loadEnv() {
@@ -21,4 +30,12 @@ func loadEnv() {
 		log.Print("No .env file found")
 	}
 	fmt.Println("環境変数を読み込みました")
+}
+
+func pingHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "正常に疎通")
+}
+
+func tasksHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Hello, world!")
 }
