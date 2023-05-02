@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"go-ca/internal/app/infrastructure/register"
 	"log"
 	"net/http"
 
@@ -13,12 +14,13 @@ import (
 func main() {
 	// 環境変数の設定
 	loadEnv()
+
 	// DB接続
 	database.ConnectDb()
 
 	// サーバー
 	http.HandleFunc("/ping", pingHandler)
-	http.HandleFunc("/tasks", tasksHandler)
+	http.HandleFunc("/tasks", register.Tasks)
 
 	// サーバーの起動
 	fmt.Println("Starting server on port 8081...")
@@ -34,8 +36,4 @@ func loadEnv() {
 
 func pingHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "正常に疎通")
-}
-
-func tasksHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello, world!")
 }
