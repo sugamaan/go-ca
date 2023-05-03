@@ -75,6 +75,35 @@ localhost:8081/tasks
 - ルーティングの記述
 - 作成するプログラムの要件定義
 
+## アーキテクチャ
+Clean Architectureを意識したディレクトリ構成になります。
+
+ルール
+- 図の上から上位レイヤーと呼ぶ。
+- 下位レイヤーから上位レイヤーへ依存を行う。同レイヤーへの依存はOK。上位レイヤーから下位レイヤーへ依存する場合はinterfaceを用いて依存性逆転の法則（DIP）を行う。
+
+
+### Clean Architecture
+Clean Architecture観点で考えた時の本ディレクトリ構成
+
+
+|            レイヤー名            |    ディレクトリ名     |
+|:---------------------------:|:--------------:|
+| Enterprise Business Rules	  |     domain     |
+| Application Business Rules	 |  application   |
+|     Interface Adapters	     |    adaptor     |
+|    Frameworks & Drivers	    | infrastructure |
+
+### レイヤードアーキテクチャ
+レイヤードアーキテクチャ観点で考えた時の本ディレクトリ構成
+
+|      レイヤー名      |    ディレクトリ名     |
+|:---------------:|:--------------:|
+|      UI層	       |    adaptor     |
+|  Application層   |  application   |
+|     Domain層     |     domain     |
+| Infrastructure層 | infrastructure |
+
 ## ディレクトリ構成
 ### ルート配下
 |    ディレクトリ名    |              詳細              |
@@ -90,6 +119,26 @@ localhost:8081/tasks
 |      /adapter       |              外部との接続を行う。APIなど。              |
 | /adapter/controller | エンドポイント定義。HTTP Requestとのマッピング。入力値のバリデーション。 |
 |       /domain       |            ドメイン層。ビジネスロジックを記述する。            |
+
+## 用語解説
+- DTO
+- DataModel
+- queryservice
+
+### DTO
+- Data Transfer Objectの略。
+- CQRSを実現するために用い、複数の集約をまたがる参照系の処理を保存する構造体として使う。
+- Application層のusecaseでIFを定義し、実装はinfrastructure層で行う。
+- ユースケースごとに発生する集約に対応するため、複数箇所で使い回しは行わない。最大公約数的な使い方をしない。
+
+### DataModel
+- 本プロジェクト固有の命名かもしれない。（適切な命名があればそちらに移管予定）
+- DBとのアクセスに用いる構造体。
+- DataModelにデータを詰めた後、domain層のオブジェクトに詰め替えて上位レイヤーへ返却する。
+
+### queryservice
+- CQRSを実現するために用いる概念であり、usecaseにてIFを定義し、infrastructure層で実装する。
+- 参照系専用のオブジェクト。
 
 ## コーディングルール
 - パッケージ名はシンプルな名詞を使う。
