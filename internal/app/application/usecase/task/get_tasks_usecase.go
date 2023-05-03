@@ -9,16 +9,6 @@ type GetTasksUsecase struct {
 	tasksRepository repository.TasksRepository
 }
 
-type GetTasksQueryService interface {
-	GetTasks() []GetTasksDto
-}
-
-type GetTasksDto struct {
-	TaskId uint64
-	Name   string
-	Reward uint64
-}
-
 func NewGetTasksUsecase(tasksRepository repository.TasksRepository) GetTasksUsecase {
 	return GetTasksUsecase{tasksRepository: tasksRepository}
 }
