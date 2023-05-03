@@ -2,13 +2,12 @@ package task
 
 import (
 	"encoding/json"
-	"fmt"
-	"go-ca/internal/app/application/usecase/task"
+	taskUsecase "go-ca/internal/app/application/usecase/task"
 	"net/http"
 )
 
 type TasksController struct {
-	GetTasksInputPort task.GetTasksInputPort
+	GetTasksInputPort taskUsecase.GetTasksInputPort
 }
 
 type Response struct {
@@ -17,14 +16,12 @@ type Response struct {
 	Reward uint64 `json:"reward"`
 }
 
-func NewTasksController(GetTasksInputPort task.GetTasksInputPort) TasksController {
+func NewTasksController(GetTasksInputPort taskUsecase.GetTasksInputPort) TasksController {
 	return TasksController{GetTasksInputPort: GetTasksInputPort}
 }
 
 func (c *TasksController) GetTasks(w http.ResponseWriter, r *http.Request) {
 	tasks := c.GetTasksInputPort.GetTasks()
-	fmt.Println("c.GetTasksInputPort.GetTasks()")
-	fmt.Printf("%#v\n", tasks)
 
 	// 構造体をレスポンスに変換
 	response := make([]*Response, len(tasks))

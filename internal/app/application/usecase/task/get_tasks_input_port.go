@@ -1,7 +1,9 @@
 package task
 
-import "go-ca/internal/app/domain/task/entity"
+import (
+	taskDomain "go-ca/internal/app/domain/task"
+)
 
 type GetTasksInputPort interface {
-	GetTasks() []*entity.Task
+	GetTasks() []*taskDomain.Task
 }

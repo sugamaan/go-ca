@@ -1,19 +1,18 @@
 package task
 
 import (
-	"go-ca/internal/app/domain/task/entity"
-	"go-ca/internal/app/domain/task/repository"
+	taskDomain "go-ca/internal/app/domain/task"
 )
 
 type GetTasksUsecase struct {
-	tasksRepository repository.TasksRepository
+	tasksRepository taskDomain.TasksRepository
 }
 
-func NewGetTasksUsecase(tasksRepository repository.TasksRepository) GetTasksUsecase {
+func NewGetTasksUsecase(tasksRepository taskDomain.TasksRepository) GetTasksUsecase {
 	return GetTasksUsecase{tasksRepository: tasksRepository}
 }
 
-func (u *GetTasksUsecase) GetTasks() []*entity.Task {
+func (u *GetTasksUsecase) GetTasks() []*taskDomain.Task {
 	// DBからタスク一覧を取得
 	tasks, err := u.tasksRepository.GetAllTasks()
 	if err != nil {

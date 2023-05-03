@@ -57,11 +57,13 @@ localhost:8081/tasks
 -  db.Close()のハンドリング
 
 # TODO
-- プレゼンターを用意
-- DTOとDataModelらへんを整理する
-  - DTOを使いたいけど、循環依存問題があるのでどうしようか...。  
-- 詰め替えが雑になっているところを修正
+- domain層のディレクトリ構成に関して考える。
+- tasksの命名に関して修正をする。
+- 同パッケージ内のset可能な問題に関してIFを使って対応できないかを検討する。
+- プレゼンターを用意する。
+- レスポンスの処理がもっと簡潔になるように変更をする。
 - DIが美しくないので修正をする。
+- Factoryに関して確認をする。
 - テーブル定義の管理
 - マイグレーションの管理
 - システム全体のエラーハンドリングのルール策定
@@ -123,7 +125,7 @@ Clean Architecture観点で考えた時の本ディレクトリ構成
 ## 用語解説
 - DTO
 - DataModel
-- queryservice
+- QueryService
 
 ### DTO
 - Data Transfer Objectの略。
@@ -136,7 +138,7 @@ Clean Architecture観点で考えた時の本ディレクトリ構成
 - DBとのアクセスに用いる構造体。
 - DataModelにデータを詰めた後、domain層のオブジェクトに詰め替えて上位レイヤーへ返却する。
 
-### queryservice
+### QueryService
 - CQRSを実現するために用いる概念であり、usecaseにてIFを定義し、infrastructure層で実装する。
 - 参照系専用のオブジェクト。
 
