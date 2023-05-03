@@ -3,7 +3,7 @@ package task
 import (
 	"go-ca/internal/app/domain/task/entity"
 	"go-ca/internal/app/domain/task/repository"
-	"go-ca/internal/app/domain/task/value_object"
+	"go-ca/internal/app/domain/task/valueobject"
 )
 
 type GetTasksUsecase struct {
@@ -42,7 +42,7 @@ func (u *GetTasksUsecase) GetTasks() []*entity.Task {
 	// DTOからNewTaskを使って[]entity.Taskへ詰め替える
 	tasks := make([]*entity.Task, len(taskDtos))
 	for i, taskDto := range taskDtos {
-		reward, err := value_object.NewReward(taskDto.Reward)
+		reward, err := valueobject.NewReward(taskDto.Reward)
 		if err != nil {
 			// TODO エラー処理
 			panic(err)

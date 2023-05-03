@@ -57,6 +57,11 @@ localhost:8081/tasks
 -  db.Close()のハンドリング
 
 # TODO
+- プレゼンターを用意
+- DTOとDataModelらへんを整理する
+  - DTOを使いたいけど、循環依存問題があるのでどうしようか...。  
+- 詰め替えが雑になっているところを修正
+- DIが美しくないので修正をする。
 - テーブル定義の管理
 - マイグレーションの管理
 - システム全体のエラーハンドリングのルール策定
@@ -85,3 +90,8 @@ localhost:8081/tasks
 |      /adapter       |              外部との接続を行う。APIなど。              |
 | /adapter/controller | エンドポイント定義。HTTP Requestとのマッピング。入力値のバリデーション。 |
 |       /domain       |            ドメイン層。ビジネスロジックを記述する。            |
+
+## コーディングルール
+- パッケージ名はシンプルな名詞を使う。
+  - ×：value_object、valueObject
+  - ○：valueobject

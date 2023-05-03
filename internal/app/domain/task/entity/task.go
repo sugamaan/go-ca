@@ -2,16 +2,16 @@ package entity
 
 import (
 	"errors"
-	"go-ca/internal/app/domain/task/value_object"
+	"go-ca/internal/app/domain/task/valueobject"
 )
 
 type Task struct {
 	taskId uint64
 	name   string
-	reward value_object.Reward
+	reward valueobject.Reward
 }
 
-func NewTask(taskId uint64, name string, reward value_object.Reward) (*Task, error) {
+func NewTask(taskId uint64, name string, reward valueobject.Reward) (*Task, error) {
 	if name == "" || len(name) > 50 {
 		return &Task{}, errors.New("タスク名が不正です")
 	}
@@ -31,6 +31,6 @@ func (t Task) GetName() string {
 	return t.name
 }
 
-func (t Task) GetReward() value_object.Reward {
+func (t Task) GetReward() valueobject.Reward {
 	return t.reward
 }
