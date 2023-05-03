@@ -23,14 +23,14 @@ func NewTask(taskId uint64, name string, reward valueobject.Reward) (*Task, erro
 	}, nil
 }
 
-func (t Task) GetTaskId() uint64 {
+func (t Task) TaskId() uint64 {
 	return t.taskId
 }
 
-func (t Task) GetName() string {
+func (t Task) Name() string {
 	return t.name
 }
 
-func (t Task) GetReward() valueobject.Reward {
+func (t Task) Reward() valueobject.Reward {
 	return t.reward
 }

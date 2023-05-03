@@ -30,9 +30,9 @@ func (c *TasksController) GetTasks(w http.ResponseWriter, r *http.Request) {
 	response := make([]*Response, len(tasks))
 	for i, t := range tasks {
 		response[i] = &Response{
-			TaskId: t.GetTaskId(),
-			Name:   t.GetName(),
-			Reward: uint64(t.GetReward()),
+			TaskId: t.TaskId(),
+			Name:   t.Name(),
+			Reward: uint64(t.Reward()),
 		}
 	}
 
