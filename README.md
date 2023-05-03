@@ -123,7 +123,43 @@ Clean Architecture観点で考えた時の本ディレクトリ構成
 |:-------------------:|:------------------------------------------:|
 |      /adapter       |              外部との接続を行う。APIなど。              |
 | /adapter/controller | エンドポイント定義。HTTP Requestとのマッピング。入力値のバリデーション。 |
-|       /domain       |            ドメイン層。ビジネスロジックを記述する。            |
+
+```shell
+.
+└── app
+    ├── adaptor
+    │   ├── controller
+    │   │   └── task
+    │   │       ├── tasks_controller.go
+    │   └── presenter
+    │       └── task
+    │           └── tasks_presenter.go
+    ├── application
+    │   ├── service
+    │   └── usecase
+    │       └── task
+    │           ├── get_tasks_input_port.go
+    │           ├── get_tasks_output_port.go
+    │           └── get_tasks_usecase.go
+    ├── domain
+    │   └── task
+    │       ├── reward.go（Value Object）
+    │       ├── task.go（Entity）
+    │       ├── task_service.go
+    │       └── tasks_repository.go
+    └── infrastructure
+        ├── database
+        │   └── database.go
+        ├── queryservice
+        ├── register（DI）
+        │   └── task.go
+        └── repository
+            └── task
+                └── tasks_repository.go
+
+```
+
+### adapter/controller
 
 ### domain/entity.go
 - ファイル名は `ディレクトリ名.go` とする。
@@ -142,12 +178,12 @@ Clean Architecture観点で考えた時の本ディレクトリ構成
 - コンストラクタはただ初期化するだけではなく、不正値をバリデーションするようにする。
 - 不変である。そのため自身の状態を変更する関数は定義しない。値を変更する場合は新しくコンストラクタにて交換をする。
 
-### domain/repository.go
+### domain/repository
 - ファイル名は `ディレクトリ名(s)_repository.go` とする。
 - 構造体名は `ディレクトリ名(s)Repository` とする。
 - データ層とのやり取りを行うためのインターフェースを定義する。
 
-### domain/service.go
+### domain/service
 
 ## 用語解説
 - DTO
@@ -176,3 +212,8 @@ Clean Architecture観点で考えた時の本ディレクトリ構成
   - ○：valueobject
 - レイヤー間のパッケージ参照時にレイヤー名を付与する。命名は `ディレクトリ名+レイヤー名`
   - ○：TaskDomain
+
+## メモ
+- 1アプリケーションで複数の境界づけられたコンテキストを扱う場合は、`internal` 配下にディレクトリを作成し、その中にコンテキストごとにディレクトリを作成する。
+  - internal/app
+  - internal/someapp
