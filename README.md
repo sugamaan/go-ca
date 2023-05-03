@@ -93,5 +93,6 @@ localhost:8081/tasks
 
 ## コーディングルール
 - パッケージ名はシンプルな名詞を使う。
-  - ×：value_object、valueObject
+  - ×：valueObject
+  - △：value_object
   - ○：valueobject
