@@ -2,13 +2,19 @@ package task
 
 import "errors"
 
-type Reward uint64
+type Reward struct {
+	value uint64
+}
 
 const DefaultReward = 100
 
 func NewReward(value uint64) (Reward, error) {
 	if value < DefaultReward {
-		return 0, errors.New("100より小さい報酬は設定できません")
+		return Reward{}, errors.New("100より小さい報酬は設定できません")
 	}
-	return Reward(value), nil
+	return Reward{value: value}, nil
+}
+
+func (r Reward) Value() uint64 {
+	return r.value
 }
