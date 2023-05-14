@@ -1,6 +1,7 @@
 package task
 
 import (
+	"fmt"
 	contractDomain "go-ca/internal/app/domain/contract"
 	taskDomain "go-ca/internal/app/domain/task"
 )
@@ -49,6 +50,12 @@ func (r *TasksRepository) GetAllTasks() ([]*taskDomain.Task, error) {
 }
 
 func (m DataModel) toTask() (*taskDomain.Task, error) {
+	// リスコフの置換原則のサンプルコードを追加
+	contractA, _ := contractDomain.NewContract("無料", 0, 1)
+	fmt.Println(contractA.GetMaxTaskRewardAmount())
+	contractB, _ := contractDomain.NewContract("ライト", 1000, 2)
+	fmt.Println(contractB.GetMaxTaskRewardAmount())
+
 	// TODO 契約に応じてRewardの引数を変更する
 	// userContract := GetUserContract()
 	newContract, _ := contractDomain.NewContract("無料", 0, 1)
