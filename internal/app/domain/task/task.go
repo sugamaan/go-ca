@@ -2,7 +2,6 @@ package task
 
 import (
 	"errors"
-	"fmt"
 )
 
 type Task struct {
@@ -21,13 +20,15 @@ func NewTask(taskId uint64, name string, reward Reward) (*Task, error) {
 	// reward = RewardImpl{value: 100} syntax error
 	//reward2 := Reward{} Invalid composite literal type: Reward
 	// しかし、rewardImplを直接呼び出せて、rewardとして返せてしまう
-	a := rewardImpl{value: 100}
-	fmt.Println(a)
+	//a := rewardImpl{value: 100}
+	//fmt.Println(a)
+	// 値を直接書き換える
+	reward.value = 100
 
 	return &Task{
 		taskId: taskId,
 		name:   name,
-		reward: a,
+		reward: reward,
 	}, nil
 }
 
