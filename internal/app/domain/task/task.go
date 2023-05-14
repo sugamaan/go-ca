@@ -18,7 +18,8 @@ func NewTask(taskId uint64, name string, reward Reward) (*Task, error) {
 
 	// テスト 同パッケージ内でprivateな構造体を呼び出してみる
 	// TODO 以下を呼べなくする
-	reward = Reward{value: 100}
+	// reward = RewardImpl{value: 100} syntax error
+	//reward2 := Reward{} Invalid composite literal type: Reward
 	fmt.Println(reward)
 
 	return &Task{
