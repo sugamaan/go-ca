@@ -2,6 +2,7 @@ package task
 
 import (
 	"errors"
+	"fmt"
 )
 
 type Task struct {
@@ -14,6 +15,10 @@ func NewTask(taskId uint64, name string, reward Reward) (*Task, error) {
 	if name == "" || len(name) > 50 {
 		return &Task{}, errors.New("タスク名が不正です")
 	}
+
+	// テスト 同パッケージ内でprivateな構造体を呼び出してみる
+	reward = Reward(1000)
+	fmt.Println(reward)
 
 	return &Task{
 		taskId: taskId,
