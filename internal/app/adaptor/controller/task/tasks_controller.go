@@ -29,7 +29,7 @@ func (c *TasksController) GetTasks(w http.ResponseWriter, r *http.Request) {
 		response[i] = &Response{
 			TaskId: t.TaskId(),
 			Name:   t.Name(),
-			Reward: uint64(t.Reward()),
+			Reward: t.Reward().Value(),
 		}
 	}
 
