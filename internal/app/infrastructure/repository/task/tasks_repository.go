@@ -4,6 +4,12 @@ import (
 	taskDomain "go-ca/internal/app/domain/task"
 )
 
+const (
+	freeContract    = 1
+	lightContract   = 2
+	premiumContract = 3
+)
+
 type DataModel struct {
 	TaskId uint64 `db:"task_id"`
 	Name   string `db:"name"`
@@ -52,7 +58,9 @@ func (m DataModel) toTask() (*taskDomain.Task, error) {
 	if err != nil {
 		return nil, err
 	}
-	reward, err := taskDomain.NewReward(m.Reward)
+	// TODO 契約に応じてRewardの引数を変更する
+	// userContract := GetUserContract()
+	reward, err := taskDomain.NewReward(m.Reward, freeContract)
 	if err != nil {
 		return nil, err
 	}
