@@ -48,11 +48,15 @@ func (r *TasksRepository) GetAllTasks() ([]*taskDomain.Task, error) {
 }
 
 func (m DataModel) toTask() (*taskDomain.Task, error) {
+	name, err := taskDomain.NewName(m.Name)
+	if err != nil {
+		return nil, err
+	}
 	reward, err := taskDomain.NewReward(m.Reward)
 	if err != nil {
 		return nil, err
 	}
-	task, err := taskDomain.NewTask(m.TaskId, m.Name, reward)
+	task, err := taskDomain.NewTask(m.TaskId, name, reward)
 	if err != nil {
 		return nil, err
 	}
