@@ -1,10 +1,17 @@
 package contract
 
 type freeContract struct {
+	name         string
+	price        uint32
+	contractType uint32
 }
 
-func NewFreeContract() Contract {
-	return &freeContract{}
+func NewFreeContract(name string, price, contractType uint32) (Contract, error) {
+	return &freeContract{
+		name:         name,
+		price:        price,
+		contractType: contractType,
+	}, nil
 }
 
 func (f freeContract) GetMaxTaskNameLength() int {
