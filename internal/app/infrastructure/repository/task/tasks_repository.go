@@ -1,6 +1,7 @@
 package task
 
 import (
+	contractDomain "go-ca/internal/app/domain/contract"
 	taskDomain "go-ca/internal/app/domain/task"
 )
 
@@ -48,11 +49,15 @@ func (r *TasksRepository) GetAllTasks() ([]*taskDomain.Task, error) {
 }
 
 func (m DataModel) toTask() (*taskDomain.Task, error) {
-	name, err := taskDomain.NewName(m.Name)
+	// TODO 契約に応じてRewardの引数を変更する
+	// ミノ駆動本6章条件分岐を参考に記述
+	// userContract := GetUserContract()
+	newContract, _ := contractDomain.NewContract("無料", 0, 1)
+	name, err := taskDomain.NewName(m.Name, newContract)
 	if err != nil {
 		return nil, err
 	}
-	reward, err := taskDomain.NewReward(m.Reward)
+	reward, err := taskDomain.NewReward(m.Reward, newContract)
 	if err != nil {
 		return nil, err
 	}
