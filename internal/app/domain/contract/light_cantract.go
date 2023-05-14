@@ -6,7 +6,7 @@ type lightContract struct {
 	contractType uint32
 }
 
-func NewLightContract(name string, price uint32, contractType uint32) (Contract, error) {
+func newLightContract(name string, price uint32, contractType uint32) (Contract, error) {
 	return &lightContract{
 		name:         name,
 		price:        price,

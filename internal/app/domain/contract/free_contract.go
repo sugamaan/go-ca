@@ -6,7 +6,7 @@ type freeContract struct {
 	contractType uint32
 }
 
-func NewFreeContract(name string, price, contractType uint32) (Contract, error) {
+func newFreeContract(name string, price, contractType uint32) (Contract, error) {
 	return &freeContract{
 		name:         name,
 		price:        price,

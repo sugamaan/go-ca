@@ -18,9 +18,9 @@ func NewContract(name string, price uint32, contractType uint32) (Contract, erro
 	}
 	switch contractType {
 	case FreeContractType:
-		return NewFreeContract(name, price, contractType)
+		return newFreeContract(name, price, contractType)
 	case LightContractType:
-		return NewLightContract(name, price, contractType)
+		return newLightContract(name, price, contractType)
 	}
 	return nil, errors.New("契約タイプが対象外です")
 }
