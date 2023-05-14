@@ -5,9 +5,9 @@ import (
 )
 
 const (
-	freeContract    = 1
-	lightContract   = 2
-	premiumContract = 3
+	FreeContract    = 1
+	LightContract   = 2
+	PremiumContract = 3
 )
 
 type DataModel struct {
@@ -60,7 +60,7 @@ func (m DataModel) toTask() (*taskDomain.Task, error) {
 	}
 	// TODO 契約に応じてRewardの引数を変更する
 	// userContract := GetUserContract()
-	reward, err := taskDomain.NewReward(m.Reward, freeContract)
+	reward, err := taskDomain.NewReward(m.Reward, FreeContract)
 	if err != nil {
 		return nil, err
 	}

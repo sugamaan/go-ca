@@ -12,9 +12,9 @@ type reward struct {
 
 const (
 	DefaultReward   = 100
-	freeContract    = 1
-	lightContract   = 2
-	premiumContract = 3
+	FreeContract    = 1
+	LightContract   = 2
+	PremiumContract = 3
 )
 
 func NewReward(value uint64, contractType uint32) (Reward, error) {
@@ -24,11 +24,11 @@ func NewReward(value uint64, contractType uint32) (Reward, error) {
 	// switch文を追加し契約内容ごとのバリデーションを追加する
 	// まずはtypeのswitch文のアンチパターンで実装してみる。
 	switch contractType {
-	case freeContract:
+	case FreeContract:
 		if value > 1000 {
 			return nil, errors.New("free契約の報酬上限は1,000までです")
 		}
-	case lightContract:
+	case LightContract:
 		if value > 5000 {
 			return nil, errors.New("light契約の報酬上限は5,000までです")
 		}
