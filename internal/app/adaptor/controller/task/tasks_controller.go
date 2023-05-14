@@ -28,7 +28,7 @@ func (c *TasksController) GetTasks(w http.ResponseWriter, r *http.Request) {
 	for i, t := range tasks {
 		response[i] = &Response{
 			TaskId: t.TaskId(),
-			Name:   t.Name(),
+			Name:   t.Name().Value(),
 			Reward: t.Reward().Value(),
 		}
 	}

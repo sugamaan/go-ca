@@ -1,20 +1,12 @@
 package task
 
-import (
-	"errors"
-)
-
 type Task struct {
 	taskId uint64
-	name   string
+	name   Name
 	reward Reward
 }
 
-func NewTask(taskId uint64, name string, reward Reward) (*Task, error) {
-	if name == "" || len(name) > 50 {
-		return &Task{}, errors.New("タスク名が不正です")
-	}
-
+func NewTask(taskId uint64, name Name, reward Reward) (*Task, error) {
 	return &Task{
 		taskId: taskId,
 		name:   name,
@@ -26,7 +18,7 @@ func (t Task) TaskId() uint64 {
 	return t.taskId
 }
 
-func (t Task) Name() string {
+func (t Task) Name() Name {
 	return t.name
 }
 
