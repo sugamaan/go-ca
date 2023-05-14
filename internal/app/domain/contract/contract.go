@@ -3,9 +3,8 @@ package contract
 import "errors"
 
 const (
-	FreeContractType    = 1
-	LightContractType   = 2
-	PremiumContractType = 3
+	FreeContractType  = 1
+	LightContractType = 2
 )
 
 type Contract interface {
@@ -22,8 +21,6 @@ func NewContract(name string, price uint32, contractType uint32) (Contract, erro
 		return NewFreeContract(name, price, contractType)
 	case LightContractType:
 		return NewLightContract(name, price, contractType)
-	case PremiumContractType:
-		return NewPremiumContract(name, price, contractType)
 	}
 	return nil, errors.New("契約タイプが対象外です")
 }
