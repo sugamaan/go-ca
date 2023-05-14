@@ -1,7 +1,6 @@
 package task
 
 import (
-	"fmt"
 	contractDomain "go-ca/internal/app/domain/contract"
 	taskDomain "go-ca/internal/app/domain/task"
 )
@@ -52,9 +51,8 @@ func (r *TasksRepository) GetAllTasks() ([]*taskDomain.Task, error) {
 func (m DataModel) toTask() (*taskDomain.Task, error) {
 	// TODO 契約に応じてRewardの引数を変更する
 	// userContract := GetUserContract()
-	// 以下は呼び出せてしまう
-	testContract, _ := contractDomain.NewFreeContract("テスト", 100, 1)
-	fmt.Println(testContract)
+	// 別パッケージからは呼び出せなくなる
+	// testContract, _ := contractDomain.NewFreeContract("テスト", 100, 1)
 	newContract, _ := contractDomain.NewContract("無料", 0, 1)
 	name, err := taskDomain.NewName(m.Name, newContract)
 	if err != nil {
