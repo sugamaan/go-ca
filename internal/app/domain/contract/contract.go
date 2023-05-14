@@ -3,12 +3,10 @@ package contract
 import "errors"
 
 const (
-	FreeContractType    = 1
-	LightContractType   = 2
-	PremiumContractType = 3
+	FreeContractType  = 1
+	LightContractType = 2
 )
 
-// Contract 切り替えたい機能をinterfaceのメソッドとして定義する
 type Contract interface {
 	GetMaxTaskNameLength() int
 	GetMaxTaskRewardAmount() uint64
@@ -21,7 +19,7 @@ type contract struct {
 }
 
 func NewContract(name string, price uint32, contractType uint32) (Contract, error) {
-	if contractType != FreeContractType && contractType != LightContractType && contractType != PremiumContractType {
+	if contractType != FreeContractType && contractType != LightContractType {
 		return nil, errors.New("契約タイプが不正です")
 	}
 	switch contractType {

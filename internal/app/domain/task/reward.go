@@ -22,7 +22,6 @@ func NewReward(value uint64, contract contractDomain.Contract) (Reward, error) {
 		return nil, errors.New("100より小さい報酬は設定できません")
 	}
 
-	// プランが増えてもロジックは変更する必要がなくなった。
 	if value > contract.GetMaxTaskRewardAmount() {
 		return nil, errors.New("契約プランの報酬上限を超えています")
 	}
