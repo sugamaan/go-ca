@@ -22,17 +22,9 @@ func NewReward(value uint64, contract contractDomain.Contract) (Reward, error) {
 		return nil, errors.New("100より小さい報酬は設定できません")
 	}
 
-	// switch文を追加し契約内容ごとのバリデーションを追加する
-	// まずはtypeのswitch文のアンチパターンで実装してみる。
-	switch contract.ContractType() {
-	case contractDomain.FreeContract:
-		if value > 1000 {
-			return nil, errors.New("free契約の報酬上限は1,000までです")
-		}
-	case contractDomain.LightContract:
-		if value > 5000 {
-			return nil, errors.New("light契約の報酬上限は5,000までです")
-		}
+	// プランが増えてもロジックは変更する必要がなくなった。
+	if value > contract.GetMaxTaskRewardAmount() {
+		return nil, errors.New("契約プランの報酬上限を超えています")
 	}
 	return reward{value: value}, nil
 }

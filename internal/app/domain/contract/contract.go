@@ -3,15 +3,15 @@ package contract
 import "errors"
 
 const (
-	FreeContract    = 1
-	LightContract   = 2
-	PremiumContract = 3
+	FreeContractType    = 1
+	LightContractType   = 2
+	PremiumContractType = 3
 )
 
+// Contract 切り替えたい機能をinterfaceのメソッドとして定義する
 type Contract interface {
-	Name() string
-	Price() uint32
-	ContractType() uint32
+	GetMaxTaskNameLength() int
+	GetMaxTaskRewardAmount() uint64
 }
 
 type contract struct {
@@ -21,20 +21,29 @@ type contract struct {
 }
 
 func NewContract(name string, price uint32, contractType uint32) (Contract, error) {
-	if contractType != FreeContract && contractType != LightContract && contractType != PremiumContract {
+	if contractType != FreeContractType && contractType != LightContractType && contractType != PremiumContractType {
 		return nil, errors.New("契約タイプが不正です")
 	}
-	return contract{name: name, price: price, contractType: contractType}, nil
+	switch contractType {
+	case FreeContractType:
+		return NewFreeContract(), nil
+	case LightContractType:
+		return NewLightContract(), nil
+		//case PremiumContractType:
+		//	return &premiumContract{}, nil
+	}
+	return nil, errors.New("契約タイプが対象外です")
 }
 
-func (c contract) Name() string {
-	return c.name
-}
-
-func (c contract) Price() uint32 {
-	return c.price
-}
-
-func (c contract) ContractType() uint32 {
-	return c.contractType
-}
+//
+//func (c contract) Name() string {
+//	return c.name
+//}
+//
+//func (c contract) Price() uint32 {
+//	return c.price
+//}
+//
+//func (c contract) ContractType() uint32 {
+//	return c.contractType
+//}
