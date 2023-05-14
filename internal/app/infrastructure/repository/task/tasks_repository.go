@@ -1,6 +1,7 @@
 package task
 
 import (
+	contractDomain "go-ca/internal/app/domain/contract"
 	taskDomain "go-ca/internal/app/domain/task"
 )
 
@@ -60,7 +61,8 @@ func (m DataModel) toTask() (*taskDomain.Task, error) {
 	}
 	// TODO 契約に応じてRewardの引数を変更する
 	// userContract := GetUserContract()
-	reward, err := taskDomain.NewReward(m.Reward, FreeContract)
+	newContract, _ := contractDomain.NewContract("無料", 0, 1)
+	reward, err := taskDomain.NewReward(m.Reward, newContract)
 	if err != nil {
 		return nil, err
 	}
