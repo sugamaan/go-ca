@@ -27,7 +27,7 @@ func NewGetTasksUsecase(taskQueryService TaskQueryService) GetTasksUsecase {
 	return GetTasksUsecase{taskQueryService: taskQueryService}
 }
 
-func (u *GetTasksUsecase) GetTasks() []GetTasksContainContractDto {
+func (u *GetTasksUsecase) GetTasks() ([]GetTasksContainContractDto, GetTaskByUserIdDto) {
 	// DBからタスク一覧を取得
 	tasks, err := u.taskQueryService.GetTasksContainContract()
 	if err != nil {
@@ -36,8 +36,12 @@ func (u *GetTasksUsecase) GetTasks() []GetTasksContainContractDto {
 	}
 
 	// DBから単一のタスクを取得
-	_, _ = u.taskQueryService.GetTaskByUserId()
+	task, err := u.taskQueryService.GetTaskByUserId()
+	if err != nil {
+		// TODO エラー処理
+		panic(err)
+	}
 
 	// UI層へ受け渡す
-	return tasks
+	return tasks, task
 }

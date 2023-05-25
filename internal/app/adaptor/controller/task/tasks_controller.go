@@ -22,7 +22,8 @@ func NewTasksController(GetTasksInputPort taskUsecase.GetTasksInputPort) TasksCo
 }
 
 func (c *TasksController) GetTasks(w http.ResponseWriter, r *http.Request) {
-	tasks := c.GetTasksInputPort.GetTasks()
+	// TODO 複数のデータを元にレスポンスを生成する
+	tasks, _ := c.GetTasksInputPort.GetTasks()
 
 	// 構造体をレスポンスに変換
 	response := make([]*Response, len(tasks))

@@ -1,5 +1,5 @@
 package task
 
 type GetTasksInputPort interface {
-	GetTasks() []GetTasksContainContractDto
+	GetTasks() ([]GetTasksContainContractDto, GetTaskByUserIdDto)
 }
