@@ -1,20 +1,29 @@
 package task
 
-import (
-	taskDomain "go-ca/internal/app/domain/task"
-)
+type TasksQueryService interface {
+	GetTasksContainContract() ([]GetTasksUsecaseDto, error)
+}
 
 type GetTasksUsecase struct {
-	tasksRepository taskDomain.TasksRepository
+	//tasksRepository   taskDomain.TasksRepository
+	tasksQueryService TasksQueryService
 }
 
-func NewGetTasksUsecase(tasksRepository taskDomain.TasksRepository) GetTasksUsecase {
-	return GetTasksUsecase{tasksRepository: tasksRepository}
+// メモ：複数の集約をまたぐDTO
+type GetTasksUsecaseDto struct {
+	TaskId       uint64 `db:"task_id"`
+	TaskName     string `db:"task_name"`
+	Reward       uint64 `db:"reward"`
+	ContractName string `db:"contract_name"`
 }
 
-func (u *GetTasksUsecase) GetTasks() []*taskDomain.Task {
+func NewGetTasksUsecase(tasksQueryService TasksQueryService) GetTasksUsecase {
+	return GetTasksUsecase{tasksQueryService: tasksQueryService}
+}
+
+func (u *GetTasksUsecase) GetTasks() []GetTasksUsecaseDto {
 	// DBからタスク一覧を取得
-	tasks, err := u.tasksRepository.GetAllTasks()
+	tasks, err := u.tasksQueryService.GetTasksContainContract()
 	if err != nil {
 		// TODO エラー処理
 		panic(err)

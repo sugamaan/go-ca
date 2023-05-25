@@ -11,9 +11,10 @@ type TasksController struct {
 }
 
 type Response struct {
-	TaskId uint64 `json:"task_id"`
-	Name   string `json:"name"`
-	Reward uint64 `json:"reward"`
+	TaskId       uint64 `json:"task_id"`
+	TaskName     string `json:"task_name"`
+	Reward       uint64 `json:"reward"`
+	ContractName string `json:"contract_name"`
 }
 
 func NewTasksController(GetTasksInputPort taskUsecase.GetTasksInputPort) TasksController {
@@ -27,9 +28,10 @@ func (c *TasksController) GetTasks(w http.ResponseWriter, r *http.Request) {
 	response := make([]*Response, len(tasks))
 	for i, t := range tasks {
 		response[i] = &Response{
-			TaskId: t.TaskId(),
-			Name:   t.Name().Value(),
-			Reward: t.Reward().Value(),
+			TaskId:       t.TaskId,
+			TaskName:     t.TaskName,
+			Reward:       t.Reward,
+			ContractName: t.ContractName,
 		}
 	}
 
