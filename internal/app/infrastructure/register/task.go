@@ -9,7 +9,7 @@ import (
 
 func Tasks(w http.ResponseWriter, r *http.Request) {
 	// DI
-	tasksQueryService := tasksQueryService.NewTasksQueryService()
+	tasksQueryService := tasksQueryService.NewTaskQueryService()
 	tasksUsecase := tasksUsecase.NewGetTasksUsecase(tasksQueryService)
 	tasksController := tasksController.NewTasksController(&tasksUsecase)
 	tasksController.GetTasks(w, r)

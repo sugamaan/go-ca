@@ -2,14 +2,7 @@ package task
 
 import "go-ca/internal/app/application/usecase/task"
 
-type TasksQueryService struct {
-}
-
-func NewTasksQueryService() *TasksQueryService {
-	return &TasksQueryService{}
-}
-
-func (t TasksQueryService) GetTasksContainContract() ([]task.GetTasksUsecaseDto, error) {
+func (t TaskQueryService) GetTasksContainContract() ([]task.GetTasksUsecaseDto, error) {
 	// TODO DBアクセスを行いデータを取得
 	// 複数の集約を跨ぐ
 	getTasksUsecaseDto := []task.GetTasksUsecaseDto{
