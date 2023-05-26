@@ -161,6 +161,12 @@ Clean Architecture観点で考えた時の本ディレクトリ構成
                 └── tasks_repository.go
 
 ```
+### infrastructure/query_service
+- ファイル名は `ディレクトリ名(s)_query_service.go` とする。
+- 単数系のファイルに構造体を定義する。構造体の命名は `ディレクトリ名QueryService`とする。1パッケージ1構造体とする。
+- QueryServiceのメソッドはDTOかドメインを返却する。（検討）
+- InterFace、DTOはUseCase層にて定義をする。本ファイルはIFの実装を行う。
+- 1UseCase1DTOとする。
 
 ### adapter/controller
 
@@ -198,11 +204,6 @@ Clean Architecture観点で考えた時の本ディレクトリ構成
 - CQRSを実現するために用い、複数の集約をまたがる参照系の処理を保存する構造体として使う。
 - Application層のusecaseでIFを定義し、実装はinfrastructure層で行う。
 - ユースケースごとに発生する集約に対応するため、複数箇所で使い回しは行わない。最大公約数的な使い方をしない。
-
-### DataModel
-- 本プロジェクト固有の命名かもしれない。（適切な命名があればそちらに移管予定）
-- DBとのアクセスに用いる構造体。
-- DataModelにデータを詰めた後、domain層のオブジェクトに詰め替えて上位レイヤーへ返却する。
 
 ### QueryService
 - CQRSを実現するために用いる概念であり、usecaseにてIFを定義し、infrastructure層で実装する。
