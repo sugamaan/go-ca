@@ -3,8 +3,12 @@ package contract
 import "errors"
 
 const (
-	FreeContractType  = 1
-	LightContractType = 2
+	FreeContractType   = 1
+	FreeContractName   = "無料プラン"
+	FreeContractPrice  = 0
+	LightContractType  = 2
+	LightContractName  = "ライトプラン"
+	LightContractPrice = 1000
 )
 
 type Contract interface {
@@ -12,15 +16,15 @@ type Contract interface {
 	GetMaxTaskRewardAmount() uint64
 }
 
-func NewContract(name string, price uint32, contractType uint32) (Contract, error) {
+func NewContract(contractType uint32) (Contract, error) {
 	if contractType != FreeContractType && contractType != LightContractType {
 		return nil, errors.New("契約タイプが不正です")
 	}
 	switch contractType {
 	case FreeContractType:
-		return newFreeContract(name, price, contractType)
+		return newFreeContract(FreeContractName, FreeContractPrice, contractType)
 	case LightContractType:
-		return newLightContract(name, price, contractType)
+		return newLightContract(LightContractName, LightContractPrice, contractType)
 	}
 	return nil, errors.New("契約タイプが対象外です")
 }

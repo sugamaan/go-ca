@@ -53,7 +53,7 @@ func (m DataModel) toTask() (*taskDomain.Task, error) {
 	// userContract := GetUserContract()
 	// 別パッケージからは呼び出せなくなる
 	// testContract, _ := contractDomain.NewFreeContract("テスト", 100, 1)
-	newContract, _ := contractDomain.NewContract("無料", 0, 1)
+	newContract, _ := contractDomain.NewContract(1)
 	name, err := taskDomain.NewName(m.Name, newContract)
 	if err != nil {
 		return nil, err
